@@ -1,0 +1,127 @@
+﻿@model IEnumerable<GoWithMe.Areas.Admin.Models.Place>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Content/Image/slide4.jpg" alt="Nhà cổ Bình Thủy" style="width:100%;">
+            <div class="carousel-caption">
+                <h3>Nhà cổ Bình Thủy</h3>
+                <p>Ngôi nhà đẹp nhất miền tây</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Content/Image/slide1.jpg" alt="Chợ nổi Cái Răng" style="width:100%;">
+            <div class="carousel-caption">
+                <h3>Chợ nổi Cái Răng</h3>
+                <p>Trải Nghiệm Thú Vị Nhất Quả Đất</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/Content/Image/slide3.jpg" alt="Đêm hoa đăng Ninh Kiều" style="width:100%;">
+            <div class="carousel-caption">
+                <h3>Đêm hoa đăng Ninh Kiều</h3>
+                <p>Ngày hội du lịch- Đêm hoa đăng Ninh Kiều</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+<<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3 text-center">
+    <h3 class="margin">Đến với Du Lịch Cần Thơ tại sao không?</h3><br>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Nhắc đến Cần Thơ chắc chắn rằng ai cũng biết đến chợ nổi Cái Răng đã quá nổi tiếng. Đây gần như là địa điểm không thể không đi khi đến du lịch Cần Thơ</p>
+            <img src="~/Content/Image/cairang.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+        </div>
+        <div class="col-sm-4">
+            <p>Ngôi nhà cổ Bình Thủy ở thành phố Cần Thơ là ngôi nhà gỗ năm gian hai mái, được gia đình họ Dương xây dựng vào năm 1870.</p>
+            <img src="~/Content/Image/nhaco.png" class="img-responsive margin" style="width:100%" alt="Image">
+        </div>
+        <div class="col-sm-4">
+            <p>Nếu người thủ đô tự hào vì có chùa Một Cột, tháp rùa hồ Gươm, Huế có hệ thống lăng tẩm thì người Cần Thơ kiêu hãnh về bến Ninh Kiều.</p>
+            <img src="~/Content/Image/ninhkieu.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+        </div>
+    </div>
+</div>
+
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+    <h3 class="margin">Thành phố Cần Thơ</h3>
+    <p>
+        Là trung tâm của vùng đồng bằng sông Cửu Long, du lịch Cần Thơ mang đến cho bạn nhiều trải nghiệm đặc trưng và thú vị của miền Tây. Hãy cùng Ngọc-Trí khám phá những địa điểm “nhất định phải đi một lần” ở Cần Thơ nhé.
+    </p>
+    <img src="~/Content/Image/cau_can_tho.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
+    <h3>mảnh đất màu mỡ phù sa.</h3>
+</div>
+
+<br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="@Url.Content("~/Content/Image/Places/" + item.Image)" alt="..." width="450" height="450"/>
+                <div class="caption">
+                    <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                    <p>@Html.DisplayFor(modelItem => item.Discription)</p>
+                    <p><a href="PlaceDetail/@Html.DisplayFor(modelItem => item.ID)" class="btn btn-primary" role="button">Xem tour</a></p>
+                    <p class="btn btn-default">@Html.ActionLink("Chi tiết", "PlaceDetail", new { id = item.ID })</p>
+                    <p class="btn btn-default">@Html.ActionLink("Bài Viết", "News", new { id = item.ID })</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!-- Container (Contact Section) -->
+<div id="contact" class="container-fluid ">
+    <h2 class="text-center">CONTACT</h2>
+    <div class="row">
+        <div class="col-sm-5">
+            <p>Liên hệ với chúng tôi và chúng tôi sẽ liên hệ lại với bạn trong vòng 24 giờ.</p>
+            <p><span class="glyphicon glyphicon-map-marker"></span> tp. Cần Thơ, Việt Nam</p>
+            <p><span class="glyphicon glyphicon-phone"></span> +841203123456</p>
+            <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+        </div>
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                </div>
+            </div>
+            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <button class="btn btn-default pull-right" type="submit">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />

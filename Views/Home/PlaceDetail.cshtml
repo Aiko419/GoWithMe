@@ -1,0 +1,25 @@
+﻿@model GoWithMe.Areas.Admin.Models.Place
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="thumbnail">
+                <a href="/w3images/lights.jpg" target="_blank">
+                    <img src="@Url.Content("~/Content/Image/Places/" + Model.Image)" alt="Lights" style="width:100%" height="350" width="400">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
+            <p>>@Html.DisplayFor(model => model.Name)</p>
+        </div>
+
+    </div>
+</div>
+
+
