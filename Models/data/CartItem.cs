@@ -10,6 +10,6 @@ namespace GoWithMe.Models
     {
         public Tour productOrder { get; set; }
         public int Quality { get; set; }
-
     }
+
 }

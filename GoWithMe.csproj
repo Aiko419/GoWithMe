@@ -201,8 +201,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlacesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TicketsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ToursController.cs" />
     <Compile Include="Areas\Admin\Models\Customer.cs" />
     <Compile Include="Areas\Admin\Models\GoWithMeDbContext.cs" />
     <Compile Include="Areas\Admin\Models\News.cs" />
@@ -211,6 +214,7 @@
     <Compile Include="Areas\Admin\Models\Tour.cs" />
     <Compile Include="Areas\Admin\Models\TourDetail.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,9 +224,13 @@
     <Compile Include="Migrations\201805030751103_Initial.Designer.cs">
       <DependentUpon>201805030751103_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805041531126_Initial1.cs" />
+    <Compile Include="Migrations\201805041531126_Initial1.Designer.cs">
+      <DependentUpon>201805041531126_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\data\CartItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -302,6 +310,21 @@
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\News\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Accounts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tours\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Tours\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Tours\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Tours\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tours\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tickets\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Tickets\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Tickets\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Tickets\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tickets\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -313,7 +336,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -349,9 +374,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\PlaceDetail.cshtml" />
-    <Content Include="Views\Home\ShoppingCart.cshtml" />
     <Content Include="Views\Home\Tour.cshtml" />
     <Content Include="Views\Home\TourDetail.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -373,6 +400,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805030751103_Initial.resx">
       <DependentUpon>201805030751103_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805041531126_Initial1.resx">
+      <DependentUpon>201805041531126_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

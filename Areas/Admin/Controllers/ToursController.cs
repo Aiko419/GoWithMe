@@ -11,56 +11,54 @@ using GoWithMe.Areas.Admin.Models;
 
 namespace GoWithMe.Areas.Admin.Controllers
 {
-    public class NewsController : Controller
+    public class ToursController : Controller
     {
         private GoWithMeDbContext db = new GoWithMeDbContext();
 
-        // GET: Admin/News
+        // GET: Admin/Tours
         public ActionResult Index()
         {
-            var news = db.News.Include(n => n.Place);
-            return View(news.ToList());
+            return View(db.Tours.ToList());
         }
 
-        // GET: Admin/News/Details/5
-        public ActionResult Details(int? id)
+        // GET: Admin/Tours/Details/5
+        public ActionResult Details(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.News.Find(id);
-            if (news == null)
+            Tour tour = db.Tours.Find(id);
+            if (tour == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(tour);
         }
 
-        // GET: Admin/News/Create
+        // GET: Admin/Tours/Create
         public ActionResult Create()
         {
-            ViewBag.PlaceID = new SelectList(db.Places, "ID", "Name");
             return View();
         }
 
-        // POST: Admin/News/Create
+        // POST: Admin/Tours/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PlaceID,Name,Content,Image")] News news,HttpPostedFileBase fileUpload)
+        public ActionResult Create([Bind(Include = "ID,Name,Quantyti,Price,Discription,StartDay,Duration,Image")] Tour tour, HttpPostedFileBase fileUpload)
         {
             try
             {
                 if (fileUpload.ContentLength > 0)
                 {
                     string _FileName = Path.GetFileName(fileUpload.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Content/Image/Places"), _FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Content/Image/Tours"), _FileName);
                     fileUpload.SaveAs(_path);
                     ViewBag.ThongBao = "Đã lưu hình vào thư mục!!";
-                    news.Image = fileUpload.FileName;
-                    db.News.Add(news);
+                    tour.Image = fileUpload.FileName;
+                    db.Tours.Add(tour);
                     db.SaveChanges();
                 }
             }
@@ -68,32 +66,31 @@ namespace GoWithMe.Areas.Admin.Controllers
             {
                 ViewBag.ThongBao = "File upload failed!!";
             }
-            ViewBag.PlaceID = new SelectList(db.Places, "ID", "Name", news.PlaceID);
-            return View(news);
+
+            return View(tour);
         }
 
-        // GET: Admin/News/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Admin/Tours/Edit/5
+        public ActionResult Edit(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.News.Find(id);
-            if (news == null)
+            Tour tour = db.Tours.Find(id);
+            if (tour == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PlaceID = new SelectList(db.Places, "ID", "Name", news.PlaceID);
-            return View(news);
+            return View(tour);
         }
 
-        // POST: Admin/News/Edit/5
+        // POST: Admin/Tours/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,PlaceID,Name,Content,Image")] News news, HttpPostedFileBase fileUpload)
+        public ActionResult Edit([Bind(Include = "ID,Name,Quantyti,Price,Discription,StartDay,Duration,Image")] Tour tour, HttpPostedFileBase fileUpload)
         {
             try
             {
@@ -104,8 +101,8 @@ namespace GoWithMe.Areas.Admin.Controllers
                     //Kiểm tra file đã tồn tại
                     fileUpload.SaveAs(_path);
                     ViewBag.ThongBao = "Đã lưu hình vào thư mục!!";
-                    news.Image = fileUpload.FileName;
-                    db.Entry(news).State = EntityState.Modified;
+                    tour.Image = fileUpload.FileName;
+                    db.Entry(tour).State = EntityState.Modified;
                     db.SaveChanges();
 
                 }
@@ -115,32 +112,31 @@ namespace GoWithMe.Areas.Admin.Controllers
                 ViewBag.ThongBao = "File upload failed!!";
 
             }
-            ViewBag.PlaceID = new SelectList(db.Places, "ID", "Name", news.PlaceID);
-            return View(news);
+            return View(tour);
         }
 
-        // GET: Admin/News/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Admin/Tours/Delete/5
+        public ActionResult Delete(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.News.Find(id);
-            if (news == null)
+            Tour tour = db.Tours.Find(id);
+            if (tour == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(tour);
         }
 
-        // POST: Admin/News/Delete/5
+        // POST: Admin/Tours/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            News news = db.News.Find(id);
-            db.News.Remove(news);
+            Tour tour = db.Tours.Find(id);
+            db.Tours.Remove(tour);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

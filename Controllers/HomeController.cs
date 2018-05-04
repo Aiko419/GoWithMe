@@ -7,12 +7,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace GoWithMe.Controllers
 {
     public class HomeController : Controller
     {
         private GoWithMeDbContext db = new GoWithMeDbContext();
+        private ApplicationDbContext applicationDbContext = new ApplicationDbContext();
         public ActionResult Index()
         {
 
@@ -29,12 +32,6 @@ namespace GoWithMe.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult ShoppingCart()
-        {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -79,7 +76,7 @@ namespace GoWithMe.Controllers
         {
             return View(db.Tours.ToList());
         }
-
+        /*
         //Tiến trình thêm sản phẩm vào giỏ hàng
         [HttpPost]
         public JsonResult AddToCart(int id)
@@ -108,7 +105,6 @@ namespace GoWithMe.Controllers
 
                 if (!flag)
                     listCartItem.Add(new CartItem { Quality = 1, productOrder = db.Tours.Find(id) });
-
                 Session["ShoppingCart"] = listCartItem;
             }
             //Count item in shopping cart 
@@ -120,6 +116,104 @@ namespace GoWithMe.Controllers
             }
             return Json(new { ItemAmount = cartcount });
         }
+        public JsonResult DeleteCartItem(int? id)
+        {
+            List<CartItem> listCartItem, listDeleteCartItem;
+            listDeleteCartItem = new List<CartItem>();
+            if (Session["ShoppingCart"] == null)
+            {
+                //Create New Shopping Cart Session 
+                listCartItem = new List<CartItem>();
+                Session["ShoppingCart"] = listCartItem;
+                
+            }
+            else
+            {
+                listCartItem = (List<CartItem>)Session["ShoppingCart"];
+                foreach (CartItem item in listCartItem)
+                {
+                    if (item.productOrder.ID != id)
+                    {
+                        listDeleteCartItem.Add(item);
+                    }
+                }
+            }
+            Session["ShoppingCart"] = listDeleteCartItem;
+            ViewData["count"] = listDeleteCartItem.Count;
+            return Json(new { ItemAmount = listDeleteCartItem.Count });
+        }
 
+        public RedirectToRouteResult UpdateCartItem(int id, int number)
+        {
+            //Process Add To Cart
+            List<CartItem> listCartItem;
+            if (Session["ShoppingCart"] == null)
+            {
+                //Create New Shopping Cart Session 
+                listCartItem = new List<CartItem>();
+                listCartItem.Add(new CartItem { Quality = number, productOrder = db.Tours.Find(id) });
+                Session["ShoppingCart"] = listCartItem;
+            }
+            else
+            {
+                bool flag = false;
+                listCartItem = (List<CartItem>)Session["ShoppingCart"];
+                foreach (CartItem item in listCartItem)
+                {
+                    if (item.productOrder.ID == id)
+                    {
+                        item.Quality = number;
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (!flag)
+                    listCartItem.Add(new CartItem { Quality = number, productOrder = db.Tours.Find(id) });
+                Session["ShoppingCart"] = listCartItem;
+            }
+
+            //Count item in shopping cart 
+            int cartcount = 0;
+            List<CartItem> ls = (List<CartItem>)Session["ShoppingCart"];
+            foreach (CartItem item in ls)
+            {
+                cartcount += item.Quality;
+            }
+
+            return RedirectToAction("Index");
+        }*/
+        [HttpPost]
+        public RedirectResult  AddSessionTour(int id, int number)
+        {
+            Session["ShoppingCart"] = new CartItem { Quality = number, productOrder = db.Tours.Find(id) };
+            var userId = User.Identity.GetUserId();
+
+            if (userId == null)  // trường hợp nếu chưa đăng nhập
+            {
+                return Redirect("/Customer/Create"); // tạo  thông tin user
+            }
+            else   // trường hợp đăng nhập rồi 
+            {
+                var customer = db.Customers.SingleOrDefault(c => c.AccountID == userId);
+                if (customer == null)
+                  {
+                     return Redirect("/Customer/Create");
+                  }
+                else
+                {
+                    var ticket = db.Tickets.SingleOrDefault(t => t.CustomerID == customer.ID && t.TourID == id);
+                    if (ticket != null)
+                    {
+                        Session["ThongBao"] = "Tour này đã được đặt!";
+                        return Redirect("/Home/TourDetail/" + id);
+                    }
+                    return Redirect("/Customer/Edit/" + customer.ID);
+                }
+                
+                
+            }
+        }
+           
     }
 }

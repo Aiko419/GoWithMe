@@ -4,31 +4,6 @@
     ViewBag.Title = "Product_Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!--Ajax Process-->
-@{
-    if (Session["ShoppingCart"] != null)
-    {
-        int cartcount = 0;
-        List<CartItem> ls = (List<CartItem>)Session["ShoppingCart"];
-        foreach (CartItem item in ls)
-        {
-            cartcount += item.Quality;
-        }
-        ViewBag.count = cartcount;
-    }
-}
-
-<script>
-    function AddToCart(TourId) {
-        $.ajax({
-            type: 'POST', url: '/Home/AddToCart', data: { id: TourId }, success: function (data) {
-                $("#Cart_Amount").html(data.ItemAmount);
-            }
-        });
-    }
-</script>
-<!--End Ajax Process-->
-
 
 <div class="container">
     <h2>@Html.DisplayFor(modelItem => Model.Name)</h2>
@@ -49,20 +24,23 @@
         </div>
         <div class="col-md-6">
             <div class="form-inline">
-                <h5>Giá cho người lớn:</h5> <h3>$20</h3>
-                <div class="form-group">
-                    <label>Số khách người lớn</label>
-                    <input type="number" class="form-control" id="email">
-                </div>
-                <h5>Giá cho trẻ em:</h5> <h3>$20</h3>
-                <div class="form-group">
-                    <label>Số khách trẻ em</label>
-                    <input type="number" class="form-control" id="pwd">
-                </div>
-                <br /><br />
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" onclick="AddToCart('@Model.ID')" />
-                </div>
+                <h5>Giá cho người lớn:</h5> <h3>@Model.Price</h3>
+                <form action="@Url.Action("AddSessionTour")" method="post">
+                    <div class="form-group">
+                        <label>Số lượng khách</label>
+                        <input type="number" class="form-control" name="number" value="1">
+                    </div>
+                    <br /><br />
+                    <input type="hidden" name="id" value="@Model.ID">
+                    @if (Session["ThongBao"] != null)
+                        {
+                            string thongbao = Session["ThongBao"].ToString();
+                            <p>@thongbao</p>
+                        }
+                    <div class="form-group">
+                        <input type="submit" value="Book" class="btn btn-default" />
+                    </div>
+                </form>
             </div>
 
         </div>

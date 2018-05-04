@@ -51,8 +51,7 @@ namespace GoWithMe.Areas.Admin.Controllers
         // GET: Admin/Accounts
         public ActionResult Index()
         {
-            var users = Db.ApplicationUsers;
-            return View(users);
+            return View();
         }
     }
 }

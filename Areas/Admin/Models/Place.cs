@@ -26,6 +26,7 @@ namespace GoWithMe.Areas.Admin.Models
         [StringLength(200)]
         public string Discription { get; set; }
 
+
         [Required]
         [StringLength(200)]
         public string Image { get; set; }
