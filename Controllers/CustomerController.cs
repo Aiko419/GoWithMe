@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
-using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 
 namespace GoWithMe.Controllers
@@ -97,6 +96,61 @@ namespace GoWithMe.Controllers
                 }
             }
             return View(customer);
+        }
+        // GET: Admin/Tickets/Delete/5
+        public ActionResult Delete(int? id, int? id1)
+        {
+            CartItem listCart = (CartItem)Session["ShoppingCart"];
+            if (listCart == null)
+            {
+                return RedirectToAction("/Home/");
+            }
+            var idtour = listCart.productOrder.ID;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ticket ticket = db.Tickets.SingleOrDefault(t => t.CustomerID == id && t.TourID == id1);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.idtour = idtour;
+            return View(ticket);
+        }
+
+        // POST: Admin/Tickets/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int? id, int? id1)
+        {
+            Ticket ticket = db.Tickets.SingleOrDefault(t => t.CustomerID == id && t.TourID == id1);
+            db.Tickets.Remove(ticket);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: Admin/Tickets/Details/5
+        public ActionResult Details(int? id, int? id1)
+        {
+            CartItem listCart = (CartItem)Session["ShoppingCart"];
+            if (listCart == null)
+            {
+                return RedirectToAction("/Home/");
+            }
+            var idtour = listCart.productOrder.ID;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //Ticket ticket = db.Tickets.Find(id);
+            Ticket ticket = db.Tickets.SingleOrDefault(t => t.CustomerID == id && t.TourID == id1);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.idtour = idtour;
+            return View(ticket);
         }
 
     }

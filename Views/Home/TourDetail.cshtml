@@ -8,23 +8,20 @@
 <div class="container">
     <h2>@Html.DisplayFor(modelItem => Model.Name)</h2>
     <p>@Html.DisplayFor(modelItem => Model.Discription)</p>
-    <p>The .caption class adds proper padding and a dark grey color to text inside thumbnails.</p>
-    <p>Click on the images to enlarge them.</p>
-    <p>Click on the images to enlarge them.</p>
     <div class="row">
         <div class="col-md-6">
             <div class="thumbnail">
                 <a href="/w3images/lights.jpg" target="_blank">
                     <img src="@Url.Content("~/Content/Image/Tours/" + Model.Image)" alt="Lights" style="width:100%" height="350" width="400">
                     <div class="caption">
-                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                        
                     </div>
                 </a>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-inline">
-                <h5>Giá cho người lớn:</h5> <h3>@Model.Price</h3>
+                <h5>Giá cho người lớn:</h5> <h3>@Model.Price$</h3>
                 <form action="@Url.Action("AddSessionTour")" method="post">
                     <div class="form-group">
                         <label>Số lượng khách</label>

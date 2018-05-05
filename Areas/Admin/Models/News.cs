@@ -1,4 +1,4 @@
-namespace GoWithMe.Areas.Admin.Models
+﻿namespace GoWithMe.Areas.Admin.Models
 {
     using System;
     using System.Collections.Generic;
@@ -14,13 +14,16 @@ namespace GoWithMe.Areas.Admin.Models
 
         public decimal PlaceID { get; set; }
 
+        [Display(Name = "Tên Tin Tức")]
         [Required]
-        [StringLength(50)]
+        [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
 
+        [Display(Name = "Nội Dung")]
         [Required]
         public string Content { get; set; }
 
+        [Display(Name = "Hình Ảnh")]
         [Required]
         [StringLength(200)]
         public string Image { get; set; }

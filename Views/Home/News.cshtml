@@ -6,21 +6,16 @@
 }
 
 <div class="container">
-    <h2>sấsdfdsfdsfdsdfds</h2>
-    <p>The .thumbnail class can be used to display an image gallery.</p>
-    <p>The .caption class adds proper padding and a dark grey color to text inside thumbnails.</p>
-    <p>Click on the images to enlarge them.</p>
+    <h2>Bài Viết</h2>
     <div class="row">
         @foreach (var item in Model.News)
         {
-            @Html.DisplayFor(modelItem => item.Name)
-
             <div class="col-md-4">
                 <div class="thumbnail">
                     <a href="/w3images/lights.jpg" target="_blank">
-                        <img src="@Url.Content("~/Content/Image/News/" + item.Image)" style="width:100%" height="350" width="400">
+                        <img src="@Url.Content("~/Content/Image/News/" + item.Image)" style="width:100%; height:350px;">
                         <div class="caption">
-                            <p>@Html.DisplayFor(modelItem => item.Content)</p>
+                            <p>@Html.DisplayFor(modelItem => item.Name)</p>
                         </div>
                     </a>
                 </div>

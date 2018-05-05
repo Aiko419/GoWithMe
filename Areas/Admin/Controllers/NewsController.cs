@@ -56,7 +56,7 @@ namespace GoWithMe.Areas.Admin.Controllers
                 if (fileUpload.ContentLength > 0)
                 {
                     string _FileName = Path.GetFileName(fileUpload.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Content/Image/Places"), _FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Content/Image/News"), _FileName);
                     fileUpload.SaveAs(_path);
                     ViewBag.ThongBao = "Đã lưu hình vào thư mục!!";
                     news.Image = fileUpload.FileName;

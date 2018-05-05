@@ -1,4 +1,4 @@
-namespace GoWithMe.Areas.Admin.Models
+﻿namespace GoWithMe.Areas.Admin.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,14 +19,18 @@ namespace GoWithMe.Areas.Admin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal ID { get; set; }
 
+
+        [Display(Name = "Tên Địa Điểm")]
         [Required]
-        [StringLength(50)]
+        [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
 
+        [Display(Name = "Mô tả")]
         [StringLength(200)]
         public string Discription { get; set; }
 
 
+        [Display(Name = "Hình ảnh")]
         [Required]
         [StringLength(200)]
         public string Image { get; set; }

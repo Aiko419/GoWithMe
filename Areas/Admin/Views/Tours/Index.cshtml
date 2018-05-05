@@ -57,7 +57,7 @@
             @Html.DisplayFor(modelItem => item.Duration)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Image)
+            <img src="@Url.Content("~/Content/Image/Tours/" + item.Image)" width="45" height="45" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

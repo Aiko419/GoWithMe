@@ -1,4 +1,4 @@
-namespace GoWithMe.Areas.Admin.Models
+﻿namespace GoWithMe.Areas.Admin.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,12 +17,15 @@ namespace GoWithMe.Areas.Admin.Models
         [Column(Order = 1)]
         public decimal CustomerID { get; set; }
 
+        [Display(Name = "Ngày Đặt Tour")]
         public DateTime Date { get; set; }
 
+        [Display(Name = "Số lượng khách đăng kí")]
         public decimal Quantyti { get; set; }
 
+        [Display(Name = "Trạng Thái")]
         [Required]
-        [StringLength(50)]
+        [StringLength(50, MinimumLength = 3)]
         public string Tatus { get; set; }
 
         public virtual Customer Customer { get; set; }

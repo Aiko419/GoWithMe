@@ -22,13 +22,14 @@ namespace GoWithMe.Areas.Admin.Controllers
         }
 
         // GET: Admin/Tickets/Details/5
-        public ActionResult Details(decimal id)
+        public ActionResult Details(int? id, int? id1)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = db.Tickets.Find(id);
+            //Ticket ticket = db.Tickets.Find(id);
+            Ticket ticket = db.Tickets.SingleOrDefault(t =>t.CustomerID == id && t.TourID == id1);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -64,13 +65,13 @@ namespace GoWithMe.Areas.Admin.Controllers
         }
 
         // GET: Admin/Tickets/Edit/5
-        public ActionResult Edit(decimal id)
+        public ActionResult Edit(int? id, int? id1)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = db.Tickets.Find(id);
+            Ticket ticket = db.Tickets.SingleOrDefault(t => t.CustomerID == id && t.TourID == id1);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -99,13 +100,13 @@ namespace GoWithMe.Areas.Admin.Controllers
         }
 
         // GET: Admin/Tickets/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(int? id, int? id1)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = db.Tickets.Find(id);
+            Ticket ticket = db.Tickets.SingleOrDefault(t => t.CustomerID == id && t.TourID == id1);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -116,9 +117,9 @@ namespace GoWithMe.Areas.Admin.Controllers
         // POST: Admin/Tickets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(int? id, int? id1)
         {
-            Ticket ticket = db.Tickets.Find(id);
+            Ticket ticket = db.Tickets.SingleOrDefault(t => t.CustomerID == id && t.TourID == id1);
             db.Tickets.Remove(ticket);
             db.SaveChanges();
             return RedirectToAction("Index");

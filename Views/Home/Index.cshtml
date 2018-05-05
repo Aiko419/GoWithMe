@@ -14,27 +14,28 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="~/Content/Image/slide4.jpg" alt="Nhà cổ Bình Thủy" style="width:100%;">
+            <img src="~/Content/Image/slide4.jpg" alt="Nhà cổ Bình Thủy" style="width:100%; height:600px;">
             <div class="carousel-caption">
                 <h3>Nhà cổ Bình Thủy</h3>
                 <p>Ngôi nhà đẹp nhất miền tây</p>
             </div>
         </div>
         <div class="item">
-            <img src="~/Content/Image/slide1.jpg" alt="Chợ nổi Cái Răng" style="width:100%;">
+            <img src="~/Content/Image/slide1.jpg" alt="Chợ nổi Cái Răng" style="width:100%; height:600px;">
             <div class="carousel-caption">
                 <h3>Chợ nổi Cái Răng</h3>
                 <p>Trải Nghiệm Thú Vị Nhất Quả Đất</p>
             </div>
         </div>
         <div class="item">
-            <img src="~/Content/Image/slide3.jpg" alt="Đêm hoa đăng Ninh Kiều" style="width:100%;">
+            <img src="~/Content/Image/slide3.jpg" alt="Đêm hoa đăng Ninh Kiều" style="width:100%; height:600px;">
             <div class="carousel-caption">
                 <h3>Đêm hoa đăng Ninh Kiều</h3>
                 <p>Ngày hội du lịch- Đêm hoa đăng Ninh Kiều</p>
             </div>
         </div>
     </div>
+
 
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -54,15 +55,15 @@
     <div class="row">
         <div class="col-sm-4">
             <p>Nhắc đến Cần Thơ chắc chắn rằng ai cũng biết đến chợ nổi Cái Răng đã quá nổi tiếng. Đây gần như là địa điểm không thể không đi khi đến du lịch Cần Thơ</p>
-            <img src="~/Content/Image/cairang.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            <img src="~/Content/Image/chonoi.jpg" class="img-responsive margin" style="width:100%; height:250px;" alt="Image" >
         </div>
         <div class="col-sm-4">
             <p>Ngôi nhà cổ Bình Thủy ở thành phố Cần Thơ là ngôi nhà gỗ năm gian hai mái, được gia đình họ Dương xây dựng vào năm 1870.</p>
-            <img src="~/Content/Image/nhaco.png" class="img-responsive margin" style="width:100%" alt="Image">
+            <img src="~/Content/Image/nhaco.png" class="img-responsive margin" style="width:100%; height:250px;" alt="Image">
         </div>
         <div class="col-sm-4">
             <p>Nếu người thủ đô tự hào vì có chùa Một Cột, tháp rùa hồ Gươm, Huế có hệ thống lăng tẩm thì người Cần Thơ kiêu hãnh về bến Ninh Kiều.</p>
-            <img src="~/Content/Image/ninhkieu.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            <img src="~/Content/Image/ninhkieu.jpg" class="img-responsive margin" style="width:100%; height:250px;" alt="Image">
         </div>
     </div>
 </div>
@@ -84,11 +85,9 @@
     {
         <div class="col-md-4">
             <div class="thumbnail">
-                <img src="@Url.Content("~/Content/Image/Places/" + item.Image)" alt="..." width="450" height="450" />
+                <img src="@Url.Content("~/Content/Image/Places/" + item.Image)" alt="..." style="width:100%; height:300px;" />
                 <div class="caption">
                     <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
-                    <p>@Html.DisplayFor(modelItem => item.Discription)</p>
-                    <p><a href="PlaceDetail/@Html.DisplayFor(modelItem => item.ID)" class="btn btn-primary" role="button">Xem tour</a></p>
                     <p class="btn btn-default">@Html.ActionLink("Chi tiết", "PlaceDetail", new { id = item.ID })</p>
                     <p class="btn btn-default">@Html.ActionLink("Bài Viết", "News", new { id = item.ID })</p>
                 </div>
