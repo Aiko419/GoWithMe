@@ -11,6 +11,7 @@ using GoWithMe.Areas.Admin.Models;
 
 namespace GoWithMe.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrator, Manager")]
     public class ToursController : Controller
     {
         private GoWithMeDbContext db = new GoWithMeDbContext();

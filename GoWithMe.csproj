@@ -316,6 +316,9 @@
     <Content Include="Areas\Admin\Views\Tickets\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Tickets\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Tickets\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Accounts\AddToRole.cshtml" />
+    <Content Include="Areas\Admin\Views\Accounts\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Accounts\RemoveFromRole.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

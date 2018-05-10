@@ -10,6 +10,7 @@ using GoWithMe.Areas.Admin.Models;
 
 namespace GoWithMe.Areas.Admin.Controllers
 {
+
     public class TicketsController : Controller
     {
         private GoWithMeDbContext db = new GoWithMeDbContext();

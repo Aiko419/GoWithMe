@@ -29,6 +29,24 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Tour", "Tour", "Home")</li>
                     @Html.Partial("_LoginPartial")
+                    
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                    {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @if (User.IsInRole("Administrator"))
+                            {
+                            <li><a href="/Admin/Accounts">Accounts</a></li>
+                            }
+                            <li><a href="/Admin/Places">Places</a></li>
+                            <li><a href="/Admin/Tours">Tours</a></li>
+                            <li><a href="/Admin/Tickets">Tickets</a></li>
+                            <li><a href="/Admin/News">News</a></li>
+                            <li><a href="/Admin/Customers">Customers</a></li>              
+                        </ul>
+                    </li>
+                    }
                 </ul>
             </div>
         </div>
